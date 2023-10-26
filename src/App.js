@@ -19,7 +19,7 @@ const MainTitle = styled.div`
 function App() {
   return (
       <MainTitle>
-        준우 todo
+        준우 todoㅁㅁㅁ
         <MainPage></MainPage>
       </MainTitle>
 
