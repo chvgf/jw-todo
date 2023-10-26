@@ -18,14 +18,11 @@ const MainTitle = styled.div`
 
 function App() {
   return (
-    <BrowserRouter>
-      <MainTitle>준우 todo</MainTitle>
-      <Routes>
-        <Route path="/" element={<MainPage />}/>
-        <Route/>
-        <Route/>
-      </Routes>
-    </BrowserRouter>
+      <MainTitle>
+        준우 todo
+        <MainPage></MainPage>
+      </MainTitle>
+
   );
 }
 
