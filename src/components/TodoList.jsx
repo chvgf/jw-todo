@@ -7,6 +7,9 @@ const TodoListWrapper = styled.div`
   min-height: 320px;
   max-height: 513px;
   overflow-y: auto;
+  background-color: #d3d3d3;
+  /* display: flex; */
+  border: 3px solid #7146c2;
 `;
 
 function TodoList(props) {
@@ -24,6 +27,8 @@ function TodoList(props) {
 
           handleRemove={props.handleRemove}
           handleChecked={props.handleChecked}
+          handleRevised={props.handleRevised}
+          handleFixValue={props.handleFixValue}
         />
       })}
 

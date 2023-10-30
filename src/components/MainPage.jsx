@@ -8,18 +8,7 @@ const TodoTemplateWrapper = styled.div`
   margin-top: 6rem;
   border-radius: 30px;
   overflow: hidden;
-
-  .app-title {
-    background: #1d3975;
-    color: white;
-    height: 50rem;
-    width: 2.5rem;
-    font-size: 2rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    
-  }
+  min-width: 560px;
 
   .content {
     background: white;
@@ -27,14 +16,17 @@ const TodoTemplateWrapper = styled.div`
 `;
 
 
+
 function MainPage(props) {
   const { children } = props;
 
   return (
-    <TodoTemplateWrapper>
-      <div className='app-title'>이게뭐람</div>
-      <div className='content'>{children}</div>    {/* 칠드런 물어보기 */}
-    </TodoTemplateWrapper>
+    <>
+      {/* <div className='app-title'>aa</div> */}
+      <TodoTemplateWrapper>
+        <div className='content'>{children}</div>    {/* 칠드런 물어보기 */}
+      </TodoTemplateWrapper>
+    </>
   );
 }
 

@@ -18,6 +18,7 @@ const StyledInput = styled.input`
   line-height: 1.5;
   color: white;
   flex: 1; 
+  display: flex;
 
   &::placeholder {
     color: #dee2e6;
@@ -62,16 +63,17 @@ function TodoInsert(props) {
 
 
   return (
-    <TodoInsertWrapper >
+    <TodoInsertWrapper
+      onSubmit={handleInsertInValue}
+    >
       <StyledInput
         onChange={handleChange}
         value={value}
         type='text'
-        placeholder='할짓거리 입력'
+        placeholder='할일 입력'
       />
       <StyledButton
-        onClick={handleInsertInValue}
-        type='button'
+        type='submit'
       >
         <BsFillArrowDownLeftSquareFill />
       </StyledButton>
