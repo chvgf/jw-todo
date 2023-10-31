@@ -9,7 +9,8 @@ import MainPage from "./components/MainPage";
 import TodoList from "./components/TodoList";
 import TodoInsert from "./components/TodoInsert";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import TodoTrashCan from "./components/TodoTrashCan";
 
 
 const GlobalStyle = createGlobalStyle`
@@ -22,8 +23,8 @@ const GlobalStyle = createGlobalStyle`
 
 const Root = styled.div`
   /* display: flex; */
-  /* justify-content: center;
-  align-items: center; */
+  /* justify-content: center; */
+  /* align-items: center; */
 `;
 
 const DeleteAll = styled.button`
@@ -51,14 +52,13 @@ const DeleteAll = styled.button`
 let date = new Date();
 let hours = date.getHours();
 let min = date.getMinutes();
-let mmin = date.getSeconds();
+let sec = date.getSeconds();
 
 function getToday(){ // todo 추가한 시간 보여주기
   let date = new Date();
   let year = date.getFullYear();
   let month = ("0" + (1 + date.getMonth())).slice(-2);
   let day = ("0" + date.getDate()).slice(-2);
-
   return "시작일: " + year + "-" + month + "-" + day;
 };
 const TimeWrapper = styled.div`
@@ -68,6 +68,7 @@ const TimeWrapper = styled.div`
   position: absolute;
   left: 20px;
   bottom: 10px;
+  box-shadow: 1px 1px 1px 1px gray;
 `;
 
 
@@ -86,7 +87,7 @@ const TimeWrapper = styled.div`
     setTodos([...todos, todo]);
   };
 
-  const handleRemove = (id) => { // todo 제거기능                // 이따 물어보긩ㅁㅁㅁㅁ
+  const handleRemove = (id) => { // todo 제거기능                // ㅁㅁㅁㅁ
     setTodos(todos.filter((todo) => {
       return todo.id !== id
     }));
@@ -99,7 +100,7 @@ const TimeWrapper = styled.div`
     }))
   }
 
-  const handleChecked = (id) => { // 쳌! 기능           // 얘도 이따 물어보긩ㅂㅁㅁㅁㅁㅁ
+  const handleChecked = (id) => { // 쳌! 기능           // ㅂㅁㅁㅁㅁㅁ
     setTodos(todos.map((CheckedTodo) => {
       return CheckedTodo.id === id ? {...CheckedTodo, checked: !CheckedTodo.checked} : CheckedTodo
     }));
@@ -110,7 +111,7 @@ const TimeWrapper = styled.div`
       return aaa.id === id ? {...aaa, text: fixText} : aaa
     })))
   }
-
+  
   return (
     <>
       <GlobalStyle  /> {/* 리셋 css */}
@@ -119,7 +120,7 @@ const TimeWrapper = styled.div`
           <TodoInsert handleInsert={handleInsert} />
           <TodoList
             todos={todos}
-            handleRemove={handleRemove} 
+            handleRemove={handleRemove}
             handleChecked={handleChecked}
             handleFixValue={handleFixValue}
             />
@@ -133,12 +134,8 @@ const TimeWrapper = styled.div`
           <BsFillExclamationTriangleFill style={{fontSize: 45}}/>
           아무것도 안하기
         </DeleteAll>
-        {/* <MainPage>
-          <TodoInsert handleInsert={handleInsert} />
-          <TodoList todos={todos} handleRemove={handleRemove} handleChecked={handleChecked}/>
-        </MainPage> */}
-        <TimeWrapper>{hours}:{min}:{mmin}</TimeWrapper>
-      </Root>          {/* ?????????????????????? 클레스..?컴포넌트..? */}
+        <TimeWrapper>{hours}:{min}:{sec}</TimeWrapper>
+      </Root>          
     </>
   );
 }

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import styled, { css } from 'styled-components';
 import { BsReverseBackspaceReverse, BsCheckSquare, BsBrush, BsPlusSquareDotted, BsReplyAllFill } from "react-icons/bs";
+import TodoTrashCan from './TodoTrashCan';
 
 
 const TodoListItemWrapper = styled.div`
@@ -41,6 +42,7 @@ const Text = styled.div`
   flex: 1; 
   display: flex;
   justify-content: space-between;
+  
 
   .textbox1 {
       font-size: 14px;
@@ -53,13 +55,14 @@ const Text = styled.div`
       line-height: 24px;
     }
 
-  ${props => props.text &&    /* 체크되었을 때 텍스트에 보여줄 스타일 */
+  ${props => props.text &&    /* 체크되었을 때 텍스트에 보여줄 스타일 */                 /* ㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁ */
     css`
       color: #71b5ec;
       text-decoration: line-through;
       opacity: 0.5;
     `
   }
+  
 `;
 
 const Remove = styled.div`
@@ -116,46 +119,55 @@ function TodoListItem(props) {
   }
 
   return (
-    <TodoListItemWrapper>
-      <CheckBox
+    <>
+      <TodoListItemWrapper>
+        <CheckBox
+          checked={props.checked}
+          onClick={() => { props.handleChecked(props.id) }}
+        > <BsCheckSquare />
+
+        </CheckBox>
+        <Text
+          text={props.checked}
+        >
+          {showBox
+            ?
+            <FixBox>
+              <input placeholder='수정할 내용 입력' onChange={fixValue} value={fixText} />
+              <BsPlusSquareDotted
+                onClick={() => {
+                  props.handleFixValue(props.id, fixText)
+                  handleFixBtn()
+                }}
+              />
+            </FixBox>
+            :
+            <div className='textbox1'>{props.text}</div>}
+
+          <div className='textbox2'>{/* JSON.stringify */(props.date)}</div>
+        </Text>
+        <FixedBtn
+          onClick={() => {
+            handleFixBtn()
+          }}
+        >
+          {showBox ? <BsReplyAllFill /> : <BsBrush />}
+        </FixedBtn>
+        <Remove
+          onClick={() => {
+            props.handleRemove(props.id)
+          }}
+        ><BsReverseBackspaceReverse />
+        </Remove>
+      </TodoListItemWrapper>
+      <TodoTrashCan
+        key={props.id}
+        id={props.id}
+        text={props.text}
         checked={props.checked}
-        onClick={() => { props.handleChecked(props.id) }}
-      > <BsCheckSquare />
-
-      </CheckBox>
-      <Text
-        text={props.checked}
-      >
-        {showBox
-          ?
-          <FixBox>
-            <input placeholder='수정할 내용 입력' onChange={fixValue} value={fixText} />
-            <BsPlusSquareDotted
-              onClick={() => {
-                props.handleFixValue(props.id, fixText)
-                handleFixBtn()
-              }}
-            />
-          </FixBox>
-          :
-          <div className='textbox1'>{props.text}</div>}
-
-        <div className='textbox2'>{/* JSON.stringify */(props.date)}</div>
-      </Text>
-      <FixedBtn
-        onClick={() => {
-          handleFixBtn()
-        }}
-      >
-        {showBox ? <BsReplyAllFill /> : <BsBrush />}
-      </FixedBtn>
-      <Remove
-        onClick={() => {
-          props.handleRemove(props.id)
-        }}
-      ><BsReverseBackspaceReverse />
-      </Remove>
-    </TodoListItemWrapper>
+        date={props.date}
+      />
+    </>
   );
 }
 
